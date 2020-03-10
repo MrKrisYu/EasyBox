@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_background">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@color/tab_white">
+        <TextView
+            android:id="@+id/applicationBar_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:fontFamily="@font/gotham"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:text="查快递"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:background="@color/tab_white"/>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/applicationBar_searchView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_below="@id/applicationBar_tv_name"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/searchview"/>
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/applicationBar_btn_myDeliverySent"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/applicationBar_searchView"
+            android:gravity="bottom"
+            android:fontFamily="@font/gotham"
+            android:textStyle="normal"
+            android:text="我寄的 0"/>
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/applicationBar_btn_myDeliveryReceived"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/applicationBar_btn_myDeliverySent"
+            android:gravity="bottom"
+            android:layout_marginStart="50dp"
+            android:fontFamily="@font/gotham"
+            android:textStyle="normal"
+            android:text="我收的 0"/>
+
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/frameLayout_for_recyclerView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingStart="@dimen/default_paddingStart"
+        android:paddingEnd="@dimen/default_paddingEnd"
+        android:paddingTop="@dimen/default_paddingTop">
+<!--        <fragment-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/fragment_search_received_delivery"-->
+<!--            android:name="com.krisyu.easybox.activity.ui.normal.search_fragment.DeliveryReceivedFragment"/>-->
+<!--        <fragment-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/fragment_search_sent_delivery"-->
+<!--            android:name="com.krisyu.easybox.activity.ui.normal.search_fragment.DeliverySentFragment"/>-->
+    </FrameLayout>
+
+</LinearLayout>

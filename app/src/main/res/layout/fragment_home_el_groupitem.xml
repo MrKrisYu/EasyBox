@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_group_indicator"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/my_device"
+            android:focusable="false"/>
+        <TextView
+            android:id="@+id/tv_group_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@id/img_group_indicator"
+            android:text="你的设备"
+            android:textStyle="bold"
+            android:textColor="@color/title_color"
+            android:textSize="24sp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"/>
+        <ImageView
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/img_group_expand"
+            android:layout_height="32dp"
+            android:layout_width="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30dp"
+            android:focusable="false"/>
+    </RelativeLayout>
+
+
+
+</LinearLayout>
