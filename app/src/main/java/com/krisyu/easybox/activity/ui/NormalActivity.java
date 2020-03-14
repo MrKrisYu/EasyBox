@@ -1,11 +1,6 @@
 package com.krisyu.easybox.activity.ui;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-
-
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.krisyu.easybox.R;
@@ -52,6 +47,7 @@ import java.util.List;
  *  *、注意导航栏红点和消息数的显示---------> 进度：
  *      To solve:
  *
+ *  *、工具栏还未完善
  *
  *****************************************************/
 
@@ -83,9 +79,6 @@ public class NormalActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-//        Toolbar navigationToolbar = (Toolbar)findViewById(R.id.navigation_toolbar);
-//        setSupportActionBar(navigationToolbar);
-
         navigationBar = (EasyNavigationBar) findViewById(R.id.navigationBar);
 
 
@@ -109,13 +102,7 @@ public class NormalActivity extends BaseActivity {
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu){
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.options_menu, menu);
-//
-//        return true;
-//    }
+
 
 
 }

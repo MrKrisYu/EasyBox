@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import com.krisyu.easybox.R;
 
-
+/**
+ *   还有ReceivedDelivery的搜索还未完成。
+ */
 
 public class SearchFragment extends Fragment implements View.OnClickListener{
 

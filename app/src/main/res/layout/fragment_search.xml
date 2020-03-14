@@ -28,7 +28,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/searchview"/>
+            android:background="@drawable/searchview"
+            app:queryHint="搜索/查单"/>
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/applicationBar_btn_myDeliverySent"

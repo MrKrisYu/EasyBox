@@ -16,11 +16,11 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="@dimen/default_paddingStart"
             android:fontFamily="@font/gotham"
-            android:textSize="32sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:text="消息"
             android:textColor="#000000"
-            android:gravity="start"
+            android:gravity="bottom"
             android:background="@color/tab_white"/>
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -41,7 +41,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/friend_list"/>
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/applicationBar_searchView"
+            android:id="@+id/message_searchView"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_toEndOf="@id/message_tv_title"
