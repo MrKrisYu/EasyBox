@@ -45,8 +45,10 @@
                 android:layout_below="@id/fragment_mine_textView_userName"
                 android:layout_alignStart="@id/fragment_mine_textView_userName"
                 android:text="完善个人信息"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"/>
+                android:textSize="16sp"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_height="wrap_content"

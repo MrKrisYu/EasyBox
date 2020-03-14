@@ -1,4 +1,4 @@
-package com.krisyu.easybox.network_connection;
+package com.krisyu.easybox.network;
 
 import android.util.Log;
 

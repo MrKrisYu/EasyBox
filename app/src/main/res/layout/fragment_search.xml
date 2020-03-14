@@ -61,16 +61,6 @@
         android:paddingStart="@dimen/default_paddingStart"
         android:paddingEnd="@dimen/default_paddingEnd"
         android:paddingTop="@dimen/default_paddingTop">
-<!--        <fragment-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:id="@+id/fragment_search_received_delivery"-->
-<!--            android:name="com.krisyu.easybox.activity.ui.normal.search_fragment.DeliveryReceivedFragment"/>-->
-<!--        <fragment-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:id="@+id/fragment_search_sent_delivery"-->
-<!--            android:name="com.krisyu.easybox.activity.ui.normal.search_fragment.DeliverySentFragment"/>-->
     </FrameLayout>
 
 </LinearLayout>

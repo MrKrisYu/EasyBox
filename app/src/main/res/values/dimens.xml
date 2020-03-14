@@ -8,4 +8,5 @@
     <dimen name="default_paddingBottom">10dp</dimen>
     <dimen name="default_paddingStart">10dp</dimen>
     <dimen name="default_paddingEnd">10dp</dimen>
+    <dimen name="default_margin">20dp</dimen>
 </resources>

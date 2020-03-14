@@ -1,13 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_background">
+    <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/tab_white">
+        <TextView
+            android:id="@+id/message_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/default_paddingStart"
+            android:fontFamily="@font/gotham"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:text="消息"
+            android:textColor="#000000"
+            android:gravity="start"
+            android:background="@color/tab_white"/>
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/message_btn_plus"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@id/message_tv_title"
+            android:layout_marginEnd="@dimen/default_paddingEnd"
+            android:background="@drawable/plus"/>
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/message_btn_friend_list"
+            android:layout_height="28dp"
+            android:layout_width="28dp"
+            android:layout_toStartOf="@id/message_btn_plus"
+            android:layout_alignBottom="@id/message_tv_title"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/friend_list"/>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/applicationBar_searchView"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@id/message_tv_title"
+            android:layout_toStartOf="@id/message_btn_friend_list"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/searchview"
+            app:queryHint="搜索"/>
+        <TextView
+            android:id="@+id/message_tv_unread"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/gotham"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_grey"
+            android:text="n 条未读消息"
+            android:layout_alignStart="@id/message_tv_title"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="20dp"
+            android:gravity="bottom"/>
+        <TextView
+            android:id="@+id/message_tv_clear_msg"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/message_tv_unread"
+            android:layout_marginStart="20dp"
+            android:drawableStart="@drawable/broom"
+            android:text="清除未读"
+            android:fontFamily="@font/gotham"
+            android:textSize="16sp"
+            android:textColor="@color/text_color_grey"/>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/message_recyclerview"
         android:layout_height="match_parent"
-        android:background="#20616161"
-        android:gravity="center"
-        android:text="Message"
-        android:textColor="#ffffff"
-        android:textSize="80sp" />
+        android:layout_width="match_parent"
+        android:background="@color/fragment_background"
+        android:paddingTop="20dp" />
 </LinearLayout>
