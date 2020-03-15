@@ -4,11 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fragment_background">
+    android:background="@color/fragment_background"
+    android:fitsSystemWindows="true">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="@color/tab_white">
+        android:background="@color/tab_white"
+        android:fitsSystemWindows="true">
         <TextView
             android:id="@+id/applicationBar_tv_name"
             android:layout_width="match_parent"
@@ -19,7 +21,8 @@
             android:text="查快递"
             android:textColor="#000000"
             android:gravity="center"
-            android:background="@color/tab_white"/>
+            android:background="@color/tab_white"
+            android:fitsSystemWindows="true"/>
         <androidx.appcompat.widget.SearchView
             android:id="@+id/applicationBar_searchView"
             android:layout_height="wrap_content"
@@ -29,7 +32,8 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/searchview"
-            app:queryHint="搜索/查单"/>
+            app:queryHint="搜索/查单"
+            android:fitsSystemWindows="true"/>
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/applicationBar_btn_myDeliverySent"
@@ -40,7 +44,8 @@
             android:gravity="bottom"
             android:fontFamily="@font/gotham"
             android:textStyle="normal"
-            android:text="我寄的 0"/>
+            android:text="我寄的 0"
+            android:fitsSystemWindows="true"/>
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/applicationBar_btn_myDeliveryReceived"
@@ -52,7 +57,8 @@
             android:layout_marginStart="50dp"
             android:fontFamily="@font/gotham"
             android:textStyle="normal"
-            android:text="我收的 0"/>
+            android:text="我收的 0"
+            android:fitsSystemWindows="true"/>
 
     </RelativeLayout>
     <FrameLayout

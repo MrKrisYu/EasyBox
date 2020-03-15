@@ -6,38 +6,34 @@
     <application
         android:name=".base.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon_express"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.user_activities.User" />
-
-        <activity android:name=".activity.user_activities.Resetpwd" />
-        <activity android:name=".activity.user_activities.Register" />
+        <activity android:name=".activity.bottom_navigation.normal.message_fragment.ChatActivity"></activity>
+        <activity android:name=".activity.user.User" />
+        <activity android:name=".activity.user.Resetpwd" />
+        <activity android:name=".activity.user.Register" />
         <activity android:name=".activity.OtherActivity" />
-        <activity android:name=".activity.ui.NormalActivity">
+        <activity android:name=".activity.bottom_navigation.NormalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.SEARCH" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
+
         <service
             android:name=".service.JWebSocketClientService"
             android:enabled="true"
             android:exported="true"></service>
     </application>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

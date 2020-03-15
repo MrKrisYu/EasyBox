@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fragment_background">
+    android:background="@color/fragment_background"
+    android:fitsSystemWindows="true">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -14,7 +15,8 @@
         android:text="主页"
         android:textColor="#000000"
         android:gravity="center"
-        android:background="@color/tab_white"/>
+        android:background="@color/tab_white"
+        android:fitsSystemWindows="true"/>
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_buttons"
         android:layout_width="match_parent"
@@ -29,10 +31,10 @@
             android:id="@+id/home_cardView_rl"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:paddingStart="20dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp">
+            android:paddingTop="@dimen/default_paddingTop"
+            android:paddingBottom="@dimen/default_paddingTop"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp">
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/btn_fast_express"
@@ -40,9 +42,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:text="快速寄件"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/express"/>
+                android:drawableTop="@drawable/express"
+                android:drawablePadding="3dp"/>
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/btn_receipt"
@@ -51,9 +55,11 @@
                 android:layout_toEndOf="@id/btn_fast_express"
                 android:layout_alignBottom="@id/btn_fast_express"
                 android:text="一键开柜"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/open_box"/>
+                android:drawableTop="@drawable/open_box"
+                android:drawablePadding="3dp"/>
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/btn_address_book"
@@ -62,9 +68,11 @@
                 android:layout_toEndOf="@id/btn_receipt"
                 android:layout_alignBottom="@id/btn_fast_express"
                 android:text="地址簿"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/my_address_book"/>
+                android:drawableTop="@drawable/my_address_book"
+                android:drawablePadding="3dp"/>
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/btn_change_station"
@@ -73,9 +81,11 @@
                 android:layout_toEndOf="@id/btn_address_book"
                 android:layout_alignBottom="@id/btn_fast_express"
                 android:text="修改基站"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/station"/>
+                android:drawableTop="@drawable/station"
+                android:drawablePadding="3dp"/>
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/btn_more"
@@ -83,9 +93,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:text="更多"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
-                android:drawableTop="@drawable/more_fill"/>
+                android:drawableTop="@drawable/more_fill"
+                android:drawablePadding="3dp"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
     <ExpandableListView
