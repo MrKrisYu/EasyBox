@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import com.krisyu.easybox.R;
 import com.krisyu.easybox.activity.bottom_navigation.normal.home_fragment.HomeFragment;
 import com.krisyu.easybox.activity.bottom_navigation.normal.location_fragment.LocationFragment;
+import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.ChatItem;
 import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.MessageFragment;
 import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.MessageListItem;
 import com.krisyu.easybox.activity.bottom_navigation.normal.mine_fragment.MineFragment;
@@ -25,7 +26,7 @@ import java.util.List;
  *
  *  1、 完成主页设计碎片构架----------------> 进度：完成构架，功能待完善
  *      To solve：
- *         * groupItem 不能单击，进而展开，显示childItem。
+ *        √ * groupItem 不能单击，进而展开，显示childItem。
  *
  *
  *  2、 完成个人信息活动构架----------------> 进度：完成构架，功能待完善
@@ -72,7 +73,7 @@ public class NormalActivity extends BaseActivity {
 //    private Toolbar toolbar;
 
     private static final String TAG = "NormalActivity";
-    private MessageListItem returnedData;
+    private ChatItem returnedDataFromChat;
 
     public EasyNavigationBar getNavigationBar() {
         return navigationBar;
@@ -97,8 +98,16 @@ public class NormalActivity extends BaseActivity {
         switch (requestCode){
             case 1: // ChatActivity 的请求码
                 if(resultCode == RESULT_OK){
-                    String str = data.getStringExtra("returnDataFromChat");
-                    Log.e(TAG, "onActivityResult: data = " + str );
+                    returnedDataFromChat = (ChatItem) data.getSerializableExtra("returnDataFromChat");
+                    MessageFragment messageFragment = (MessageFragment) fragments.get(2);
+                    Log.e(TAG, "onActivityResult: messageFragment" +  messageFragment);
+                    for(MessageListItem item: messageFragment.getMsgLists()){
+                        if(item.getUserName().equals(returnedDataFromChat.getFriendName())){
+                            item.setContent(returnedDataFromChat.getContent());
+                            item.setTime(returnedDataFromChat.getTime().split(" ")[1]);
+                            messageFragment.notifyAdapterDataChanged();
+                        }
+                    }
                 }
                 break;
             default:

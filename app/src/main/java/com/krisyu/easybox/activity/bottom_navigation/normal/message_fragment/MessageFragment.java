@@ -2,6 +2,7 @@ package com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ import java.util.TimeZone;
  *     3、 解决好友列表和添加列表的问题
  *     4、 解决点击头像生成的界面的问题
  *     5、 解决搜索问题
+ *     6、 解决数据发到 Fragment的问题
  */
 
 public class MessageFragment extends Fragment implements View.OnClickListener, PopupMenu.OnMenuItemClickListener{
@@ -56,7 +58,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
         initData();
         initView(messageFragment);
         initEvent();
-
+        Log.e(TAG, "onCreateView: MessageFragment" + MessageFragment.this );
         return messageFragment;
     }
 
@@ -139,5 +141,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
         return false;
     }
 
-
+    public List<MessageListItem> getMsgLists(){
+        return msgLists;
+    }
+    public MessageListAdapter getMsgListAdapter(){
+        return msgListAdapter;
+    }
+    public void notifyAdapterDataChanged(){
+        getMsgListAdapter().notifyDataSetChanged();
+    }
 }

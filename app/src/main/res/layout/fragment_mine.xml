@@ -22,8 +22,8 @@
             android:fitsSystemWindows="true">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/fragment_mine_cirImg_headPic"
-                android:layout_height="68dp"
-                android:layout_width="68dp"
+                android:layout_height="56dp"
+                android:layout_width="56dp"
                 android:src="@drawable/box_discard"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="20dp"
@@ -36,24 +36,27 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_toEndOf="@id/fragment_mine_cirImg_headPic"
-                android:layout_alignBottom="@id/fragment_mine_cirImg_headPic"
-                android:layout_marginBottom="24dp"
+                android:layout_alignTop="@id/fragment_mine_cirImg_headPic"
+                android:layout_marginTop="@dimen/default_paddingTop"
                 android:layout_marginStart="10dp"
+                android:gravity="center"
                 android:text="@string/app_name"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:fitsSystemWindows="true"/>
             <TextView
                 android:id="@+id/fragment_mine_textView_description"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_below="@id/fragment_mine_textView_userName"
+                android:layout_marginTop="10dp"
                 android:layout_alignStart="@id/fragment_mine_textView_userName"
+                android:layout_marginStart="@dimen/default_margin"
                 android:text="完善个人信息"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/gotham"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:fitsSystemWindows="true"/>
         </RelativeLayout>
         <LinearLayout
@@ -71,7 +74,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/my_address_book" />
@@ -88,7 +91,7 @@
             android:drawablePadding="@dimen/default_paddingStart"
             android:textStyle="bold"
             android:fontFamily="@font/gotham"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/text_color_grey"
             android:textAlignment="textStart"
             android:drawableStart="@drawable/my_purchase_record" />
@@ -105,7 +108,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/my_wallet" />
@@ -122,7 +125,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/my_service" />
@@ -142,7 +145,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/about" />
@@ -159,7 +162,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/suggestion_feedback" />
@@ -176,7 +179,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/settings" />
@@ -190,7 +193,7 @@
             android:text="退出账号"
             android:textStyle="bold"
             android:fontFamily="@font/gotham"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/text_color_grey"
             android:textAlignment="center"
             android:background="@color/tab_white"/>
