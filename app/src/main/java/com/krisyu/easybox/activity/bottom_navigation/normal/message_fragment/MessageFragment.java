@@ -2,7 +2,6 @@ package com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,21 +18,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.utils.LogUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- *     1、 解决时区的问题
- *     2、 解决聊天界面的问题
+ *   √  1、 解决时区的问题
+ *   √  2、 解决聊天界面的问题
  *     3、 解决好友列表和添加列表的问题
  *     4、 解决点击头像生成的界面的问题
  *     5、 解决搜索问题
- *     6、 解决数据发到 Fragment的问题
+ *   √  6、 解决数据发到 Fragment的问题
  */
 
 public class MessageFragment extends Fragment implements View.OnClickListener, PopupMenu.OnMenuItemClickListener{
@@ -49,6 +50,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
 
     private List<MessageListItem> msgLists;
     private MessageListAdapter msgListAdapter;
+//-----------------------------------------Activity相关方法------------------------------------------
+    public List<MessageListItem> getMsgLists(){
+        return msgLists;
+    }
+    public MessageListAdapter getMsgListAdapter(){
+        return msgListAdapter;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -58,10 +66,12 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
         initData();
         initView(messageFragment);
         initEvent();
-        Log.e(TAG, "onCreateView: MessageFragment" + MessageFragment.this );
+        LogUtil.e(TAG, "onCreateView: MessageFragment" + MessageFragment.this );
         return messageFragment;
     }
 
+
+//---------------------------------------------初始化方法--------------------------------------------
     private void initData(){
         msgLists = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("HH:mm ", Locale.CHINA);
@@ -72,8 +82,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
                 msgContent + 10000, format.format(new Date()), 1));
         msgLists.add(new MessageListItem(R.drawable.default_head_pic, "Micheal",
                 msgContent + 20000, format.format(new Date()), 30));
-        msgLists.add(new MessageListItem(R.drawable.default_head_pic, "Rich",
-                msgContent + 30000, format.format(new Date()), 99));
+//        msgLists.add(new MessageListItem(R.drawable.default_head_pic, "Rich",
+//                msgContent + 30000, format.format(new Date()), 99));
 
 
     }
@@ -84,6 +94,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
         plus = (Button)view.findViewById(R.id.message_btn_plus);
         numOf_unreadMessage = (TextView)view.findViewById(R.id.message_tv_unread);
         clearUnread = (TextView)view.findViewById(R.id.message_tv_clear_msg);
+        clearUnread.setOnClickListener(MessageFragment.this);
         messageRecyclerView = (RecyclerView)view.findViewById(R.id.message_recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         msgListAdapter = new MessageListAdapter(msgLists, mContext);
@@ -99,6 +110,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
         clearUnread.setOnClickListener(MessageFragment.this);
     }
 
+
+//------------------------------------------接口方法------------------------------------------------
     // 重写onClick方法
     @Override
     public void onClick(View v){
@@ -118,7 +131,12 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
                 popupMenu.show();
                 break;
             case R.id.message_tv_clear_msg:
-                Toast.makeText(mContext, "清楚未读", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "清除未读", Toast.LENGTH_SHORT).show();
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm ", Locale.CHINA);
+                format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+                notifyAdapterItemMoved(new MessageListItem(R.drawable.default_head_pic, "111",
+                        "TEST", format.format(new Date()), 1),
+                        msgLists.size()-1, 0);
                 break;
             default:
                 Toast.makeText(mContext, "onClick(): 非法 ID", Toast.LENGTH_SHORT).show();
@@ -141,13 +159,34 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
         return false;
     }
 
-    public List<MessageListItem> getMsgLists(){
-        return msgLists;
-    }
-    public MessageListAdapter getMsgListAdapter(){
-        return msgListAdapter;
-    }
+
+
+
+
+//-----------------------------------------通知UI数据改变方法------------------------------------------
+    /**
+     *  通知 适配器数据改变了
+     */
     public void notifyAdapterDataChanged(){
-        getMsgListAdapter().notifyDataSetChanged();
+        msgListAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * 通知RecyclerViewAdapter 要进行将数据源中fromPosition索引的item移至toPosition索引处
+     * @param item 要插入的数据，若为null则不插入
+     * @param fromPosition 原item的索引
+     * @param toPosition    目标索引
+     */
+    public void notifyAdapterItemMoved(MessageListItem item, int fromPosition, int toPosition){
+        if(null != item){
+            msgLists.add(item);
+            fromPosition++;
+        }else{
+            LogUtil.i(TAG, "notifyAdapterItemMoved():插入的item为空");
+        }
+        Collections.swap(msgLists, fromPosition, toPosition);
+        msgListAdapter.notifyItemMoved(fromPosition, toPosition); // 当前有新消息时，刷新ListView中的显示
+        messageRecyclerView.scrollToPosition(0);
+
     }
 }

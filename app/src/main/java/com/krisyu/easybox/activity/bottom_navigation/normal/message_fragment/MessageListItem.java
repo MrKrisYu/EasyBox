@@ -8,6 +8,8 @@ public class MessageListItem implements Serializable {
     private String userName;
     private String time;
     private int numberOfunread;
+    private boolean isTop;
+    private boolean isEditing;
 
     public MessageListItem(int headImageId, String userName, String content, String time, int numberOfunread) {
         this.content = content;
@@ -15,6 +17,9 @@ public class MessageListItem implements Serializable {
         this.userName = userName;
         this.time = time;
         this.numberOfunread = numberOfunread;
+        this.isTop = false;
+        this.isEditing = false;
+
     }
 
     public int getHeadImageId() {
@@ -55,5 +60,20 @@ public class MessageListItem implements Serializable {
 
     public void setNumberOfunread(int numberOfunread) {
         this.numberOfunread = numberOfunread;
+    }
+
+    public boolean isTop() {
+        return isTop;
+    }
+
+    public void setTop(boolean top) {
+        isTop = top;
+    }
+    public boolean isEditing() {
+        return isEditing;
+    }
+
+    public void setEditing(boolean editing) {
+        isEditing = editing;
     }
 }

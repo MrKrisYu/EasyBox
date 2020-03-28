@@ -12,6 +12,8 @@ public class ChatItem implements Serializable {
     private String content;
     private int type;
     private String friendName;
+    private boolean isTop;
+    private boolean isEditing;
 
     public ChatItem(String time, int headImgId, String content, int type, String friendName) {
         this.time = time;
@@ -19,6 +21,7 @@ public class ChatItem implements Serializable {
         this.content = content;
         this.type = type;
         this.friendName = friendName;
+        this.isTop = false;
     }
 
 
@@ -60,5 +63,21 @@ public class ChatItem implements Serializable {
 
     public void setFriendName(String friendName) {
         this.friendName = friendName;
+    }
+
+    public boolean isTop() {
+        return isTop;
+    }
+
+    public void setTop(boolean top) {
+        isTop = top;
+    }
+
+    public boolean isEditing() {
+        return isEditing;
+    }
+
+    public void setEditing(boolean editing) {
+        isEditing = editing;
     }
 }

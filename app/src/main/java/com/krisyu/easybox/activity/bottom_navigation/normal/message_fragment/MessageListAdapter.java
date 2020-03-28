@@ -1,7 +1,8 @@
 package com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment;
 
-import android.app.Activity;
+
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         holder.headPic.setImageResource(msgListItems.get(position).getHeadImageId());
         holder.userName.setText(msgListItems.get(position).getUserName());
         holder.content.setText(msgListItems.get(position).getContent());
+        if(msgListItems.get(position).isEditing()){
+            Drawable drawable = mContext.getDrawable(R.drawable.edit);
+            drawable.setBounds(0,0,drawable.getMinimumWidth(),drawable.getMinimumHeight());
+            holder.content.setCompoundDrawables(drawable, null, null, null);
+        }else{
+            holder.content.setCompoundDrawables(null, null, null, null);
+        }
         holder.time.setText(msgListItems.get(position).getTime());
         holder.unreadNum.setText(Integer.toString(msgListItems.get(position).getNumberOfunread()));
         holder.relativeLayout.setOnClickListener(new View.OnClickListener(){

@@ -1,7 +1,6 @@
 package com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.utils.LogUtil;
 
 import java.util.List;
 
@@ -82,7 +82,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             holder.rightTime.setText(chatItem.getTime());
             holder.rightContent.setText(chatItem.getContent());
         }else{
-            Log.e(TAG, "onBindViewHolder: " + "ChatItem的Type 成员变量值 错误。" );
+            LogUtil.e(TAG, "onBindViewHolder: " + "ChatItem的Type 成员变量值 错误。" );
             holder.leftRelativaLayout.setVisibility(View.GONE);
             holder.rightRelativaLayout.setVisibility(View.GONE);
         }

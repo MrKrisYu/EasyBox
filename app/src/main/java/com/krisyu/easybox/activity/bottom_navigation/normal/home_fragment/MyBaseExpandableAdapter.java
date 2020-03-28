@@ -1,7 +1,6 @@
 package com.krisyu.easybox.activity.bottom_navigation.normal.home_fragment;
 
 import android.content.Context;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
