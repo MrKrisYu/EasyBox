@@ -1,6 +1,8 @@
 package com.krisyu.easybox.network;
 
-import android.util.Log;
+
+
+import com.krisyu.easybox.utils.LogUtil;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_6455;
@@ -15,21 +17,21 @@ public class JWebSocketClient extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshakedata) {
-        Log.e("JWebSocketClient", "onOpen()");
+        LogUtil.e("JWebSocketClient", "onOpen()");
     }
 
     @Override
     public void onMessage(String message) {
-        Log.e("JWebSocketClient", "onMessage()");
+        LogUtil.e("JWebSocketClient", "onMessage()");
     }
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
-        Log.e("JWebSocketClient", "onClose()");
+        LogUtil.e("JWebSocketClient", "onClose():");
     }
 
     @Override
     public void onError(Exception ex) {
-        Log.e("JWebSocketClient", "onError()");
+        LogUtil.e("JWebSocketClient", "onError()");
     }
 }

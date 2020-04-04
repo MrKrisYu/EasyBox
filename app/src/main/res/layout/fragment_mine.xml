@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fragment_background">
+    android:background="@color/fragment_background"
+    android:fitsSystemWindows="true">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:fitsSystemWindows="true">
         <RelativeLayout
             android:id="@+id/fragment_mine_relativeLayout_top"
             android:layout_height="150dp"
@@ -16,39 +18,46 @@
             android:paddingBottom="@dimen/default_paddingBottom"
             android:paddingStart="@dimen/default_paddingStart"
             android:paddingEnd="@dimen/default_paddingEnd"
-            android:background="@color/tab_white">
+            android:background="@color/tab_white"
+            android:fitsSystemWindows="true">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/fragment_mine_cirImg_headPic"
-                android:layout_height="68dp"
-                android:layout_width="68dp"
+                android:layout_height="56dp"
+                android:layout_width="56dp"
                 android:src="@drawable/box_discard"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 app:civ_border_width="2dp"
-                app:civ_border_color="@color/cir_img_border_color_transparent"/>
+                app:civ_border_color="@color/cir_img_border_color_transparent"
+                android:fitsSystemWindows="true"/>
             <TextView
                 android:id="@+id/fragment_mine_textView_userName"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_toEndOf="@id/fragment_mine_cirImg_headPic"
-                android:layout_alignBottom="@id/fragment_mine_cirImg_headPic"
-                android:layout_marginBottom="24dp"
+                android:layout_alignTop="@id/fragment_mine_cirImg_headPic"
+                android:layout_marginTop="@dimen/default_paddingTop"
                 android:layout_marginStart="10dp"
+                android:gravity="center"
                 android:text="@string/app_name"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"/>
+                android:textSize="22sp"
+                android:fitsSystemWindows="true"/>
             <TextView
                 android:id="@+id/fragment_mine_textView_description"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_below="@id/fragment_mine_textView_userName"
+                android:layout_marginTop="10dp"
                 android:layout_alignStart="@id/fragment_mine_textView_userName"
+                android:layout_marginStart="@dimen/default_margin"
                 android:text="完善个人信息"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/gotham"
-                android:textSize="16sp"/>
+                android:textSize="14sp"
+                android:fitsSystemWindows="true"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_height="wrap_content"
@@ -65,7 +74,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/my_address_book" />
@@ -82,7 +91,7 @@
             android:drawablePadding="@dimen/default_paddingStart"
             android:textStyle="bold"
             android:fontFamily="@font/gotham"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/text_color_grey"
             android:textAlignment="textStart"
             android:drawableStart="@drawable/my_purchase_record" />
@@ -99,7 +108,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/my_wallet" />
@@ -116,7 +125,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/my_service" />
@@ -136,7 +145,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/about" />
@@ -153,7 +162,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/suggestion_feedback" />
@@ -170,7 +179,7 @@
                 android:drawablePadding="@dimen/default_paddingStart"
                 android:textStyle="bold"
                 android:fontFamily="@font/gotham"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@color/text_color_grey"
                 android:textAlignment="textStart"
                 android:drawableStart="@drawable/settings" />
@@ -184,7 +193,7 @@
             android:text="退出账号"
             android:textStyle="bold"
             android:fontFamily="@font/gotham"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/text_color_grey"
             android:textAlignment="center"
             android:background="@color/tab_white"/>

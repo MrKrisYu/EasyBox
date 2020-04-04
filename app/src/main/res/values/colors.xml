@@ -23,4 +23,5 @@
     <color name="ReceivedDelivery_title_background">#4DD0E1</color>
     <color name="sentDelivery_title_background">#FF8A65</color>
     <color name="price_highlight_red">#E91E63</color>
+    <color name="message_bubble_orange_bg">#FF6D00</color>
 </resources>

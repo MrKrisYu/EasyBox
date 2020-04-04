@@ -4,11 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fragment_background">
+    android:background="@color/fragment_background"
+    android:fitsSystemWindows="true">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@color/tab_white">
+        android:background="@color/tab_white"
+        android:fitsSystemWindows="true">
         <TextView
             android:id="@+id/message_tv_title"
             android:layout_width="wrap_content"
@@ -16,12 +18,13 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="@dimen/default_paddingStart"
             android:fontFamily="@font/gotham"
-            android:textSize="32sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:text="消息"
             android:textColor="#000000"
-            android:gravity="start"
-            android:background="@color/tab_white"/>
+            android:gravity="bottom"
+            android:background="@color/tab_white"
+            android:fitsSystemWindows="true"/>
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/message_btn_plus"
@@ -30,7 +33,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignBottom="@id/message_tv_title"
             android:layout_marginEnd="@dimen/default_paddingEnd"
-            android:background="@drawable/plus"/>
+            android:background="@drawable/plus"
+            android:fitsSystemWindows="true"/>
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/message_btn_friend_list"
@@ -39,9 +43,10 @@
             android:layout_toStartOf="@id/message_btn_plus"
             android:layout_alignBottom="@id/message_tv_title"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/friend_list"/>
+            android:background="@drawable/friend_list"
+            android:fitsSystemWindows="true"/>
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/applicationBar_searchView"
+            android:id="@+id/message_searchView"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_toEndOf="@id/message_tv_title"
@@ -50,7 +55,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/searchview"
-            app:queryHint="搜索"/>
+            app:queryHint="搜索"
+            android:fitsSystemWindows="true"/>
         <TextView
             android:id="@+id/message_tv_unread"
             android:layout_height="wrap_content"
@@ -62,7 +68,8 @@
             android:layout_alignStart="@id/message_tv_title"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="20dp"
-            android:gravity="bottom"/>
+            android:gravity="bottom"
+            android:fitsSystemWindows="true"/>
         <TextView
             android:id="@+id/message_tv_clear_msg"
             android:layout_height="wrap_content"
@@ -74,12 +81,13 @@
             android:text="清除未读"
             android:fontFamily="@font/gotham"
             android:textSize="16sp"
-            android:textColor="@color/text_color_grey"/>
+            android:textColor="@color/text_color_grey"
+            android:fitsSystemWindows="true"/>
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/message_recyclerview"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:background="@color/fragment_background"
-        android:paddingTop="20dp" />
+        android:paddingTop="10dp" />
 </LinearLayout>

@@ -1,9 +1,13 @@
 package com.krisyu.easybox.base;
 
+
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.krisyu.easybox.R;
+import com.krisyu.easybox.utils.WindowUtils;
 
 public abstract class BaseActivity extends AppCompatActivity {
    private Toast mToast;
@@ -11,6 +15,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        initStatusBar();
         setContentView(getContentViewId());
         ActivityCollector.addActivity(this);
     }
@@ -44,6 +49,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             mToast.show();
         }catch (Exception e){}
 
+    }
+
+    private void initStatusBar(){
+        WindowUtils.setStatusBarColor(this, R.color.tab_white);
+        WindowUtils.setLightStatusBar(this, true, false);
     }
 
 }
