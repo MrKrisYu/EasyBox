@@ -2,7 +2,7 @@ package com.krisyu.easybox.utils;
 
 public interface Constants {
 
-    //url
+    //url ..
     String URL="http://krisyu.nat300.top/machine_mqtt/";      // 101.200.126.182
     String GET_MACHINE = "apiController/getMachine"; //获取柜子
     String OPEN_DOOR = "apiController/getMachine"; //开
