@@ -23,6 +23,7 @@ import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.Mes
 import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.MessageListItem;
 import com.krisyu.easybox.activity.bottom_navigation.normal.mine_fragment.MineFragment;
 import com.krisyu.easybox.activity.bottom_navigation.normal.search_fragment.SearchFragment;
+import com.krisyu.easybox.activity.user.UserData;
 import com.krisyu.easybox.base.BaseActivity;
 import com.krisyu.easybox.network.JWebSocketClient;
 import com.krisyu.easybox.service.JWebSocketClientService;
@@ -77,13 +78,13 @@ import java.util.TimeZone;
 public class NormalActivity extends BaseActivity {
 
     private EasyNavigationBar navigationBar;
-    private String[] tabText = {"首页", "快递查询", "消息", "服务网点", "我的"};
+    private String[] tabText = {"首页", "快递查询", "消息", "我的"};   //  "服务网点",
     // 未选中的icon
     private int[] normalIcon = {R.drawable.home, R.drawable.search, R.drawable.message,
-            R.drawable.location, R.drawable.mine};
+            R.drawable.mine};   // R.drawable.location,
     // 选中的Icon
     private  int[] selectIcon = {R.drawable.home_yes, R.drawable.search_yes, R.drawable.message_yes,
-            R.drawable.location_yes, R.drawable.mine_yes};
+            R.drawable.mine_yes};  // R.drawable.location_yes,
 
     private List<Fragment> fragments = new ArrayList<>();
 
@@ -93,6 +94,19 @@ public class NormalActivity extends BaseActivity {
 
 
 //-------------------------------------Activity相关方法---------------------------------------------
+
+    /**
+     * 启动该活动的静态方法
+     * @param context 启动该活动的上下文
+     * @param userData 启动该活动需要的数据类型 MessageListItem
+     */
+    public static void actionStart(Context context, UserData userData){
+        Intent intent = new Intent(context, NormalActivity.class);
+        intent.setAction("LoginActivityTONormalActivity");
+        intent.putExtra("userData", userData);
+        context.startActivity(intent);
+    }
+
 
     public EasyNavigationBar getNavigationBar() {
         return navigationBar;
@@ -117,6 +131,7 @@ public class NormalActivity extends BaseActivity {
         verifyConnection();
         // 注册广播接收器
         doRegisterReceiver();
+
 
     }
 
@@ -243,32 +258,7 @@ private JWebSocketClientService jWebSocketClientService;
             jWebSocketClientService = binder.getService();
             client = jWebSocketClientService.client;
             LogUtil.e(TAG, "onServiceConnected()： client = " + client.toString() );
-
-            // 设置回调接口
-            //            jWebSocketClientService.setDataCallback(new JWebSocketClientService.DataCallback() {
-//                @Override
-//                public void dataChanged(String str) {
-//                    Message msg = handler.obtainMessage();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("ServerResponse", str);
-//                    msg.setData(bundle);
-//                    // 发送通知
-//                    LogUtil.i(TAG, "onServiceConnected-->dataChanged: handler发消息");
-//                    handler.sendMessage(msg);
-//                }
-//            });
-
         }
-
-//        @SuppressLint("HandlerLeak")
-//        Handler handler = new Handler(){
-//            @Override
-//            public void handleMessage(@NonNull android.os.Message msg){
-//                final Message message = msg;
-//                LogUtil.i(TAG, "onServiceConnected--> 开始handleServerResponse");
-//                handleServerResponse(message);
-//            }
-//        };
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -380,7 +370,7 @@ private JWebSocketClientService jWebSocketClientService;
                                     + ", jWebSocketClientService = " + jWebSocketClientService.toString());
                             // --修改--这里的username为用户自己的名称ID
                             jWebSocketClientService.sendMsg(1,
-                                    JWebSocketClientService.REQUEST_KEY_USERNAME, "Rich",
+                                    JWebSocketClientService.REQUEST_KEY_USERNAME, "KrisYu",
                                     JWebSocketClientService.REQUEST_KEY_PSW, "123");
                         }else{
                             setVerification(false);
@@ -400,6 +390,7 @@ private JWebSocketClientService jWebSocketClientService;
         LogUtil.i(TAG, "开启服务");
         webSocketServiceIntent = new Intent(NormalActivity.this, JWebSocketClientService.class);
         startService(webSocketServiceIntent);
+
     }
 
     /**
@@ -423,7 +414,7 @@ private JWebSocketClientService jWebSocketClientService;
         return (MessageFragment)fragments.get(2);
     }
     public MineFragment getMineFragment(){
-        return (MineFragment)fragments.get(4);
+        return (MineFragment)fragments.get(3);
     }
 
     /**
@@ -440,7 +431,7 @@ private JWebSocketClientService jWebSocketClientService;
         fragments.add(new HomeFragment());
         fragments.add(new SearchFragment());
         fragments.add(new MessageFragment());
-        fragments.add(new LocationFragment());
+//        fragments.add(new LocationFragment());
         fragments.add(new MineFragment());
         navigationBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
@@ -454,6 +445,11 @@ private JWebSocketClientService jWebSocketClientService;
                 .navigationBackground(getColor(R.color.tab_white))
                 .build();
 
+        //用户碎片的 数据获取
+        MineFragment mineFragment = getMineFragment();
+        UserData userData = (UserData)getIntent().getSerializableExtra("userData");
+        LogUtil.i(TAG, "UserData->UserName = " + userData.getUserName());
+        mineFragment.setUserData(userData);
     }
 
 

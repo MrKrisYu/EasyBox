@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.activity.user.UserData;
+import com.krisyu.easybox.utils.LogUtil;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,20 +33,32 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private Button suggestionFeedback;
     private Button setting;
     private Button exitAccount;
+    private static final String TAG = "MineFragment";
+    private UserData mUserData = null;
+//----------------------------------------获取本地成员属性-------------------------------------------
+    public void setUserData(UserData userData){
+        mUserData = userData;
+    }
+    public UserData getUserData(){
+        return mUserData;
+    }
 
+
+//----------------------------------------Fragment生命周期-------------------------------------------
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         mView = inflater.inflate(R.layout.fragment_mine, container, false);
         mContext = getActivity();
+
         initView(mView);
         initEvents();
-
-
         return mView;
     }
 
+
+//----------------------------------------初始化方法-------------------------------------------
     private void initView(View view){
         headPic = (CircleImageView)view.findViewById(R.id.fragment_mine_cirImg_headPic);
         userDescription = (TextView)view.findViewById(R.id.fragment_mine_textView_description);
@@ -57,6 +71,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         suggestionFeedback = (Button)view.findViewById(R.id.fragment_mine_btn_customerFeedback);
         setting = (Button)view.findViewById(R.id.fragment_mine_btn_setting);
         exitAccount = (Button)view.findViewById(R.id.fragment_mine_btn_exitAccount);
+        userName.setText(mUserData.getUserName());
     }
 
     private void initEvents(){
@@ -70,8 +85,6 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         suggestionFeedback.setOnClickListener(MineFragment.this);
         setting.setOnClickListener(MineFragment.this);
         exitAccount.setOnClickListener(MineFragment.this);
-        userName.setText("User321123");
-        userDescription.setText("这个用户很懒，什么也没有留下。");
     }
 
     @Override

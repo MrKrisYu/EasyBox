@@ -1,13 +1,26 @@
 package com.krisyu.easybox.service;
 
+
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 
 import androidx.collection.ArrayMap;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
 
+import com.krisyu.easybox.R;
+import com.krisyu.easybox.activity.bottom_navigation.NormalActivity;
+import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.ChatActivity;
+import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.MessageListItem;
 import com.krisyu.easybox.network.JWebSocketClient;
 import com.krisyu.easybox.utils.Constants;
 import com.krisyu.easybox.utils.LogUtil;
@@ -15,7 +28,12 @@ import com.krisyu.easybox.utils.LogUtil;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
+import java.util.TimeZone;
 
 
 /**
@@ -31,6 +49,9 @@ public class JWebSocketClientService extends Service {
     public static final String REQUEST_KEY_PSW = "password";
     private static final String REQUEST_KEY_VERIFICATION = "$VERIFICATION";
     private static final String REQUEST_KEY_CHAT = "$CHAT";
+    private static final String RESPONSE_KEY_VERIFICATION = "$VERIFICATION_FEEDBACK";
+    private static final String RESPONSE_KEY_CHAT_FEEDBACK = "$CHAT_FEEDBACK";
+    private static final String RESPONSE_KEY_CHAT_INCOMING = "$CHAT_INCOMING";
 
     // 具体数据具体设计
 //    private String data = null;
@@ -94,7 +115,7 @@ public class JWebSocketClientService extends Service {
     }
 
 // ---------------------------------------WebSocket---------------------------------------------
-
+    private String buffServerResponse = null;
     /**
      * 初始化websocket连接
      */
@@ -112,11 +133,17 @@ public class JWebSocketClientService extends Service {
 //                    dataCallback.dataChanged(message);
 //                }
 
+                // 缓存消息
+                buffServerResponse = message;
                 // 广播机制
                 Intent intent = new Intent("com.kris.serverResponse");
                 intent.putExtra("serverResponse", message);
                 sendBroadcast(intent);
 
+                // 发送消息通知
+                Thread notificationThread = new Thread(notificationRunnable);
+                notificationThread.setName("notificationThread");
+                notificationThread.start();
             }
 
             @Override
@@ -148,7 +175,6 @@ public class JWebSocketClientService extends Service {
 
 
     public ArrayMap<String,String> msgMap = new ArrayMap<>();
-
     /**
      * 开启向服务器发送请求的线程
      * @param msgType 消息类型：1——验证请求
@@ -227,15 +253,84 @@ public class JWebSocketClientService extends Service {
 
 //--------------------------------------------消息通知---------------------------------------------
 
+    private void sendNotification(String sender, String content){
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class iot in the ss new and support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LogUtil.i(TAG, "CreateNotification: Get Into Channel Creation");
+            NotificationChannel channel1 = new NotificationChannel("1", "channel1", NotificationManager.IMPORTANCE_DEFAULT);
+            channel1.setDescription("channelDescription");
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel1);
+            }
+        }
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm ", Locale.CHINA);
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
 
+        MessageListItem notificationData = new MessageListItem(R.drawable.default_head_pic, "KrisYu",
+                "NotificationTest", format.format(new Date()), 1);
+        Intent resultIntent = new Intent(this, ChatActivity.class);
+        resultIntent.putExtra("friendData", notificationData);
+        // 创建包含ChatActivity的返回栈
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(resultIntent);
+        // 获得包含整个返回栈的PendingIntent
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification= new NotificationCompat.Builder(this, "1")
+                .setSmallIcon(R.mipmap.icon_express)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.icon_express))
+                .setContentTitle(sender)
+                .setContentText(content)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setContentIntent(resultPendingIntent)
+                .setAutoCancel(true)
+                .setWhen(System.currentTimeMillis())
+                .setDefaults(Notification.DEFAULT_VIBRATE | Notification.DEFAULT_ALL | Notification.DEFAULT_SOUND)
+                .build();
+        if (notificationManager != null) {
+            notificationManager.notify(1, notification);
+        }
+    }
 
+    private Runnable notificationRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if(buffServerResponse != null){
+                final String msg = buffServerResponse;
+                buffServerResponse = null;
+                ArrayMap<String, String> userNameAndContent = ChatMsgFilter(msg);
+                if(null != userNameAndContent){
+                    sendNotification(userNameAndContent.get(REQUEST_KEY_SENDER), userNameAndContent.get(REQUEST_KEY_CONTENT));
+                }
+            }
+        }
+    };
+
+    private ArrayMap<String, String> ChatMsgFilter(String serverResponse){
+        ArrayMap<String, String> userNameAndContent = new ArrayMap<>();
+        String[] splitedResponse = serverResponse.split("`");
+        if(splitedResponse[0].equals(RESPONSE_KEY_CHAT_INCOMING)){
+            for (String responseItem: splitedResponse) {
+                if(responseItem.contains(REQUEST_KEY_CONTENT)){
+                    userNameAndContent.put(REQUEST_KEY_CONTENT,responseItem.split("=")[1]);
+                }else if(responseItem.contains(REQUEST_KEY_SENDER)){
+                    userNameAndContent.put(REQUEST_KEY_SENDER,responseItem.split("=")[1]);
+                }
+            }
+        }else{
+            return null;
+        }
+        return userNameAndContent;
+    }
 //--------------------------------------websocket心跳检测--------------------------------------------
     private static final long HEART_BEAT_RATE = 10 * 1000;//每隔10秒进行一次对长连接的心跳检测
     private Handler mHandler = new Handler();
     private Runnable heartBeatRunnable = new Runnable() {
         @Override
         public void run() {
-            LogUtil.e(TAG, "心跳包检测websocket连接状态, this = " +this.toString() + ", heartBeatRunnable = " + heartBeatRunnable.toString());
             if (client != null) {
                 if (client.isClosed()) {
                     reconnectWs();
@@ -268,22 +363,4 @@ public class JWebSocketClientService extends Service {
         }.start();
     }
 
-
-// ---------------------------------------数据回调---------------------------------------------------
-
-//    /**
-//     *  数据回调接口
-//     */
-//    DataCallback dataCallback = null;
-//    public DataCallback getDataCallback() {
-//        return dataCallback;
-//    }
-//    public void setDataCallback(DataCallback dataCallback){
-//        this.dataCallback = dataCallback;
-//    }
-//
-//    // 通过回调机制，将Service内部的变化传递到外部
-//    public interface DataCallback{
-//        void dataChanged(String str);
-//    }
 }

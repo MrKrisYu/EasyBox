@@ -1,7 +1,6 @@
 package com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -22,9 +21,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -79,6 +78,7 @@ public class ChatActivity extends BaseActivity {
      */
     public static void actionStart(Activity context, MessageListItem friendData){
         Intent intent = new Intent(context, ChatActivity.class);
+        intent.setAction("MessageFragmentToChatActivity");
         intent.putExtra("friendData", friendData);
         context.startActivityForResult(intent,1);
     }
@@ -88,7 +88,6 @@ public class ChatActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         LogUtil.e(TAG, "onCreate");
         friendData = (MessageListItem)getIntent().getSerializableExtra("friendData");
-
         // 数据初始化
         initData();
         // 启动WebSocket客户端服务
@@ -102,6 +101,7 @@ public class ChatActivity extends BaseActivity {
 
         //注册广播接收器
         doRegisterReceiver();
+
 
 
     }
@@ -220,32 +220,7 @@ public class ChatActivity extends BaseActivity {
             jWebSocketClientService = binder.getService();
             client = jWebSocketClientService.client;
             LogUtil.e(TAG, "onServiceConnected(): client = " + client.toString() );
-
-            // 实现回调接口
-//            jWebSocketClientService.setDataCallback(new JWebSocketClientService.DataCallback() {
-//                @Override
-//                public void dataChanged(String str) {
-//                    Message msg = handler.obtainMessage();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("ServerResponse", str);
-//                    msg.setData(bundle);
-//                    // 发送通知
-//                    LogUtil.i(TAG, "onServiceConnected-->dataChanged: handler发消息");
-//                    handler.sendMessage(msg);
-//                }
-//            });
-
         }
-
-//        @SuppressLint("HandlerLeak")
-//        Handler handler = new Handler(){
-//            @Override
-//            public void handleMessage(@NonNull android.os.Message msg){
-//                final Message message = msg;
-//                LogUtil.i(TAG, "onServiceConnected--> 开始handleServerResponse");
-//                handleServerResponse(message);
-//            }
-//        };
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -443,10 +418,10 @@ public class ChatActivity extends BaseActivity {
         format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
 
         chatItemList = new ArrayList<>();
-        chatItemList.add(new ChatItem(format.format(new Date()), friendData.getHeadImageId(), "您好！", ChatItem.MESSAGE_RECEIVED,friendData.getUserName()));
-        // 这里应该用自己的用户名，暂用好友名字代替
-        chatItemList.add(new ChatItem(format.format(new Date()), R.drawable.friend, "您好！", ChatItem.MESSAGE_SEND,friendData.getUserName()));
-        chatItemList.add(new ChatItem(format.format(new Date()), friendData.getHeadImageId(), friendData.getContent(), ChatItem.MESSAGE_RECEIVED,friendData.getUserName()));
+        chatItemList.add(new ChatItem(format.format(new Date()), R.drawable.default_head_pic, friendData.getContent(), ChatItem.MESSAGE_RECEIVED,friendData.getUserName()));
+//        // 这里应该用自己的用户名，暂用好友名字代替
+//        chatItemList.add(new ChatItem(format.format(new Date()), R.drawable.friend, "您好！", ChatItem.MESSAGE_SEND,friendData.getUserName()));
+//        chatItemList.add(new ChatItem(format.format(new Date()), friendData.getHeadImageId(), friendData.getContent(), ChatItem.MESSAGE_RECEIVED,friendData.getUserName()));
 
     }
 

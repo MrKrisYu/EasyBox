@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.activity.bottom_navigation.NormalActivity;
 import com.krisyu.easybox.base.BaseActivity;
 
 import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
@@ -54,7 +55,7 @@ public class MainActivity extends BaseActivity {
     private TextView mChangepwdText;
     private UserDataManager mUserDataManager;         //用户数据管理类
 
-
+//------------------------------------Activity生命周期 的相关方法-------------------------------------
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +101,31 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        if (mUserDataManager == null) {
+            mUserDataManager = new UserDataManager(this);
+            mUserDataManager.openDataBase();
+        }
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SQLiteStudioService.instance().stop();
+    }
+
+    @Override
+    protected void onPause() {
+        if (mUserDataManager != null) {
+            mUserDataManager.closeDataBase();
+            mUserDataManager = null;
+        }
+        super.onPause();
+    }
+
+
     View.OnClickListener mListener = new View.OnClickListener() {                  //不同按钮按下的监听事件选择
         public void onClick(View v) {
             switch (v.getId()) {
@@ -140,10 +166,9 @@ public class MainActivity extends BaseActivity {
                 }else{
                     editor.putBoolean("mRememberCheck", false);
                 }
-                editor.commit();
+                editor.apply();
 
-                Intent intent = new Intent(MainActivity.this,User.class) ;    //切换Login Activity至User Activity
-                startActivity(intent);
+                NormalActivity.actionStart(this,new UserData(userName, userPwd));
                 finish();
                 Toast.makeText(this, getString(R.string.login_success),Toast.LENGTH_SHORT).show();//登录成功提示
             }else if(result==0){
@@ -187,29 +212,4 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @Override
-    protected void onResume() {
-        if (mUserDataManager == null) {
-            mUserDataManager = new UserDataManager(this);
-            mUserDataManager.openDataBase();
-        }
-        super.onResume();
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SQLiteStudioService.instance().stop();
-    }
-
-
-    @Override
-    protected void onPause() {
-        if (mUserDataManager != null) {
-            mUserDataManager.closeDataBase();
-            mUserDataManager = null;
-        }
-        super.onPause();
-    }
 }

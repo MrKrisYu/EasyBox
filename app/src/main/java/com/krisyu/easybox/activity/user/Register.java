@@ -43,6 +43,7 @@ public class Register extends BaseActivity {
         }
 
     }
+
     View.OnClickListener m_register_Listener = new View.OnClickListener() {    //不同按钮按下的监听事件选择
         public void onClick(View v) {
             switch (v.getId()) {
@@ -57,6 +58,7 @@ public class Register extends BaseActivity {
             }
         }
     };
+
     public void register_check() {                                //确认按钮的监听事件
         if (isUserNameAndPwdValid()) {
             String userName = mAccount.getText().toString().trim();
