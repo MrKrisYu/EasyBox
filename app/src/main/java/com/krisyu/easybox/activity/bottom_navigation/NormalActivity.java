@@ -12,20 +12,18 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.krisyu.easybox.R;
-import com.krisyu.easybox.activity.bottom_navigation.normal.home_fragment.HomeFragment;
-import com.krisyu.easybox.activity.bottom_navigation.normal.location_fragment.LocationFragment;
-import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.ChatItem;
-import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.MessageFragment;
-import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.MessageListItem;
-import com.krisyu.easybox.activity.bottom_navigation.normal.mine_fragment.MineFragment;
-import com.krisyu.easybox.activity.bottom_navigation.normal.search_fragment.SearchFragment;
-import com.krisyu.easybox.activity.user.UserData;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.home_fragment.HomeFragment;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.ChatItem;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.MessageFragment;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.MessageListItem;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.mine_fragment.MineFragment;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.search_fragment.SearchFragment;
 import com.krisyu.easybox.base.BaseActivity;
 import com.krisyu.easybox.network.JWebSocketClient;
+import com.krisyu.easybox.room_framework.entities.UserData;
 import com.krisyu.easybox.service.JWebSocketClientService;
 import com.krisyu.easybox.utils.LogUtil;
 import com.next.easynavigation.view.EasyNavigationBar;
@@ -58,18 +56,14 @@ import java.util.TimeZone;
  *
  *
  *
- *  4、 完成服务服务网点构架---------------> 进度：
- *      To solve:
- *
- *
- *  5、 完成消息对话构架------------------> 进度： 完成构架
+ *  4、 完成消息对话构架------------------> 进度： 完成构架
  *      To solve:
  *
  *
  *  *、注意导航栏红点和消息数的显示---------> 进度：
  *      To solve:
  *
- *  *、工具栏还未完善
+ *
  *
  *****************************************************/
 

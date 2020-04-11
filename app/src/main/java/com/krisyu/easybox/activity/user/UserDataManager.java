@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.krisyu.easybox.room_framework.entities.UserData;
+
 public class UserDataManager {             //用户数据管理类
     //一些宏定义和声明
     private static final String TAG = "UserDataManager";

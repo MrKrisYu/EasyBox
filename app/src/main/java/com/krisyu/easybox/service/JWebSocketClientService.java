@@ -18,9 +18,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 
 import com.krisyu.easybox.R;
-import com.krisyu.easybox.activity.bottom_navigation.NormalActivity;
-import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.ChatActivity;
-import com.krisyu.easybox.activity.bottom_navigation.normal.message_fragment.MessageListItem;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.ChatActivity;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.MessageListItem;
 import com.krisyu.easybox.network.JWebSocketClient;
 import com.krisyu.easybox.utils.Constants;
 import com.krisyu.easybox.utils.LogUtil;
@@ -29,7 +28,6 @@ import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Set;

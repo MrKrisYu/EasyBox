@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.bottom_navigation.normal.message_fragment.ChatActivity"
+    tools:context=".activity.bottom_navigation.fragments.message_fragment.ChatActivity"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chat_toolbar"
