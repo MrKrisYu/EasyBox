@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment;
+package com.krisyu.easybox.mode;
 
 import java.io.Serializable;
 

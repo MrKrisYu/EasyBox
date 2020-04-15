@@ -10,15 +10,16 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 import com.krisyu.easybox.R;
 import com.krisyu.easybox.activity.bottom_navigation.fragments.home_fragment.HomeFragment;
-import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.ChatItem;
+import com.krisyu.easybox.mode.ChatItem;
 import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.MessageFragment;
-import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.MessageListItem;
+import com.krisyu.easybox.mode.MessageListItem;
 import com.krisyu.easybox.activity.bottom_navigation.fragments.mine_fragment.MineFragment;
 import com.krisyu.easybox.activity.bottom_navigation.fragments.search_fragment.SearchFragment;
 import com.krisyu.easybox.base.BaseActivity;
@@ -85,6 +86,7 @@ public class NormalActivity extends BaseActivity {
     private static final String TAG = "NormalActivity";
     private ChatItem returnedDataFromChat;
 
+    private UserData userData;
 
 
 //-------------------------------------Activity相关方法---------------------------------------------
@@ -114,6 +116,13 @@ public class NormalActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        if(getIntent() != null){
+            if(getIntent().getAction() != null){
+                if(getIntent().getAction().equals("LoginActivityTONormalActivity")){
+                    userData = (UserData)getIntent().getSerializableExtra("userData");
+                }
+            }
+        }
         LogUtil.e(TAG, "onCreate");
         // 初始化UI
         initView();
@@ -121,10 +130,10 @@ public class NormalActivity extends BaseActivity {
         startJWebSocketServiceClient();
         // 绑定服务
         bindJWebSocketClientService();
-        // 验证连接WebSocket客户端
-        verifyConnection();
         // 注册广播接收器
         doRegisterReceiver();
+        // 验证连接WebSocket客户端
+        verifyConnection();
 
 
     }
@@ -352,28 +361,31 @@ private JWebSocketClientService jWebSocketClientService;
     }
 
     private void verifyConnection(){
-        Handler myHandler = new Handler();
-        myHandler.postDelayed(new Runnable() {
+        final Runnable verificationRun = new Runnable() {
             @Override
             public void run() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(client != null && client.isOpen()){
-                            LogUtil.e(TAG, "verifyConnection: client = " + client.toString()
-                                    + ", jWebSocketClientService = " + jWebSocketClientService.toString());
-                            // --修改--这里的username为用户自己的名称ID
-                            jWebSocketClientService.sendMsg(1,
-                                    JWebSocketClientService.REQUEST_KEY_USERNAME, "KrisYu",
-                                    JWebSocketClientService.REQUEST_KEY_PSW, "123");
-                        }else{
-                            setVerification(false);
-                            Toast.makeText(NormalActivity.this,"连接失败，请稍等或重启App", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).start();
+                if(client != null && client.isOpen()){
+                    LogUtil.e(TAG, "verifyConnection: client = " + client.toString()
+                            + ", jWebSocketClientService = " + jWebSocketClientService.toString());
+                    // --修改--这里的username为用户自己的名称ID
+                    jWebSocketClientService.sendMsg(1,
+                            new String[]{JWebSocketClientService.REQUEST_KEY_USERNAME, JWebSocketClientService.REQUEST_KEY_PSW},
+                            new String[]{userData.getUserName(), userData.getUserPwd()});
+                }else{
+                    setVerification(false);
+                    Toast.makeText(NormalActivity.this,"连接失败，请稍等或重启App", Toast.LENGTH_SHORT).show();
+                }
             }
-        }, 1000);
+        };
+
+        new Thread("VerificationThread"){
+            @Override
+            public void run(){
+                Looper.prepare();
+                new Handler().postDelayed(verificationRun, 1000);
+                Looper.loop();
+            }
+        }.start();
 
     }
 
@@ -441,7 +453,6 @@ private JWebSocketClientService jWebSocketClientService;
 
         //用户碎片的 数据获取
         MineFragment mineFragment = getMineFragment();
-        UserData userData = (UserData)getIntent().getSerializableExtra("userData");
         LogUtil.i(TAG, "UserData->UserName = " + userData.getUserName());
         mineFragment.setUserData(userData);
     }

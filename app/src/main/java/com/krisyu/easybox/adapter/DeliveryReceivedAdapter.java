@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.bottom_navigation.fragments.search_fragment;
+package com.krisyu.easybox.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.mode.DeliveryItem;
 
 import java.util.List;
 

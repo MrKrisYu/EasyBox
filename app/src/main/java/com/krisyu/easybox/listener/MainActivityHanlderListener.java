@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.user.listener;
+package com.krisyu.easybox.listener;
 
 import android.os.Handler;
 
@@ -13,17 +13,7 @@ public class MainActivityHanlderListener extends Handler implements LifecycleObs
     private boolean enabled = true;
     private Lifecycle lifecycle;
     private Callback mCallback;
-//    private static MainActivityHanlderListener myInstance;
 
-
-//    public static MainActivityHanlderListener getInstance(Lifecycle lifecycle, Callback callback){
-//        synchronized (MainActivityHanlderListener.class){
-//            if(myInstance == null){
-//                myInstance = new MainActivityHanlderListener(lifecycle, callback);
-//            }
-//        }
-//        return myInstance;
-//    }
 
 
     public MainActivityHanlderListener(Lifecycle lifecycle, Callback callback){
@@ -34,13 +24,8 @@ public class MainActivityHanlderListener extends Handler implements LifecycleObs
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     void start(){
-//        LogUtil.d(TAG, "Lifecycle.Event.ON_START--> myInstance = " + myInstance);
         LogUtil.d(TAG, "enable = " + enabled);
         if(enabled){
-//            if(myInstance == null){
-//                LogUtil.d(TAG, "Lifecycle.Event.ON_START-->重新获得实例");
-//                myInstance = getInstance(lifecycle, mCallback);
-//            }
         }
     }
 
@@ -49,8 +34,6 @@ public class MainActivityHanlderListener extends Handler implements LifecycleObs
         LogUtil.d(TAG, "Lifecycle.Event.ON_STOP-->清楚实例的回调和消息，并置实例为null");
         // disconnect if connected
         this.removeCallbacksAndMessages(null);
-//        myInstance = null;
-
 
     }
 

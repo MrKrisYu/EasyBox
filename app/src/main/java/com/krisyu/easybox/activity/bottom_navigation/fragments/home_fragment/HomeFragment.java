@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.adapter.MyBaseExpandableAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

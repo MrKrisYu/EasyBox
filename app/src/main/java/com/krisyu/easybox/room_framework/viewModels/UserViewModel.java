@@ -19,12 +19,7 @@ public class UserViewModel extends ViewModel {
     private LiveData<List<UserData>> mAllUserData;
     private UserRepository mUserRepository;
 
-    public LiveData<List<UserData>> getAllUserData(){
-        return mAllUserData;
-    }
-    public UserRepository getUserRepository(){
-        return mUserRepository;
-    }
+
 
     public UserViewModel(@NonNull Context context){
         mUserRepository = new UserRepository(context);
@@ -64,6 +59,15 @@ public class UserViewModel extends ViewModel {
 
 //-------------------------------------仓库的操作方法------------------------------------------
 
+
+
+//-----------------------------------GETTER&SETTER--------------------------------------------
+    public LiveData<List<UserData>> getAllUserData(){
+    return mAllUserData;
+}
+    public UserRepository getUserRepository(){
+        return mUserRepository;
+    }
 
 
 }

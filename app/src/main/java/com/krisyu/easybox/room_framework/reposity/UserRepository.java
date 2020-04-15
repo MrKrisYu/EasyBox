@@ -1,6 +1,5 @@
 package com.krisyu.easybox.room_framework.reposity;
 
-import android.content.AsyncQueryHandler;
 import android.content.ContentValues;
 import android.content.Context;
 

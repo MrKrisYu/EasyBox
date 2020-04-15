@@ -1,6 +1,7 @@
 package com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
@@ -18,6 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.activity.bottom_navigation.NormalActivity;
+import com.krisyu.easybox.adapter.MessageListAdapter;
+import com.krisyu.easybox.mode.MessageListItem;
 import com.krisyu.easybox.utils.LogUtil;
 
 import java.text.SimpleDateFormat;
@@ -117,7 +121,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, P
     public void onClick(View v){
         switch (v.getId()){
             case R.id.message_btn_friend_list:
-                Toast.makeText(mContext, "好友列表", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), FriendListActivity.class));
                 break;
             case R.id.message_btn_plus:
                 // 创建弹出式菜单对象

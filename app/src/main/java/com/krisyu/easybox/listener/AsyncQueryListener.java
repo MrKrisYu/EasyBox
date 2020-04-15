@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.user.listener;
+package com.krisyu.easybox.listener;
 
 
 import com.krisyu.easybox.handler.AsyncQueryHandler;
@@ -15,8 +15,6 @@ public class AsyncQueryListener extends AsyncQueryHandler<UserRepository> implem
     private boolean enabled = true; // 测试
     private Lifecycle lifecycle;
     private Callback mCallback;
-//    private String mThreadName;
-//    private static AsyncQueryListener myInstance;
     private UserRepository ur;
 
 
@@ -30,33 +28,19 @@ public class AsyncQueryListener extends AsyncQueryHandler<UserRepository> implem
         void onDeleteComplete(int token, int functionFlag, Object cookie, int result);
     }
 
-//    public static AsyncQueryListener getInstance(UserRepository ur, Lifecycle lifecycle, Callback callback){
-//        synchronized (AsyncQueryListener.class){
-//            if(myInstance == null){
-//                myInstance = new AsyncQueryListener(ur, lifecycle, callback);
-//            }
-//        }
-//        return myInstance;
-//    }
+
 
     public AsyncQueryListener(UserRepository ur, Lifecycle lifecycle, Callback callback){
         super(ur);
         this.ur = ur;
         this.lifecycle = lifecycle;
         this.mCallback = callback;
-//        mThreadName = this.getWorkerThreadName();
     }
     //--------------------------------------LifecycleObserve----------------------------------------
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     void start(){
-//        LogUtil.d(TAG, "Lifecycle.Event.ON_START--> myInstance = " + myInstance);
-        LogUtil.d(TAG, "enable = " + enabled);
-//        LogUtil.d(TAG, "WorkThread is changed? " + (!mThreadName.equals(this.getWorkerThreadName())));
         if(enabled){
-//            if(!mThreadName.equals(this.getWorkerThreadName())){
-//                this.recreateWorkerThread();
-//                mThreadName = this.getWorkerThreadName();
-//            }
+
         }
     }
 
@@ -65,8 +49,6 @@ public class AsyncQueryListener extends AsyncQueryHandler<UserRepository> implem
         LogUtil.d(TAG, "Lifecycle.Event.ON_STOP-->清楚实例的回调和消息，并置实例为null");
         // disconnect if connected
         this.removeCallbacksAndMsg();
-//        this.quitSafely();
-//        myInstance = null;
 
 
     }

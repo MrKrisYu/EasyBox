@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment;
+package com.krisyu.easybox.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.mode.ChatItem;
 import com.krisyu.easybox.utils.LogUtil;
 
 import java.util.List;

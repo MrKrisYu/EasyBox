@@ -13,8 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.krisyu.easybox.R;
-import com.krisyu.easybox.activity.user.listener.AsyncQueryListener;
-import com.krisyu.easybox.activity.user.listener.MainActivityHanlderListener;
+import com.krisyu.easybox.activity.MainActivity;
+import com.krisyu.easybox.listener.AsyncQueryListener;
+import com.krisyu.easybox.listener.MainActivityHanlderListener;
 import com.krisyu.easybox.base.BaseActivity;
 import com.krisyu.easybox.room_framework.entities.UserData;
 import com.krisyu.easybox.room_framework.reposity.UserRepository;
@@ -163,7 +164,7 @@ public class Resetpwd extends BaseActivity {
                         if(rowUpdated >= 0){
                             Toast.makeText(Resetpwd.this, getString(R.string.resetpwd_success),Toast.LENGTH_SHORT).show();
 
-                            Intent intent_Register_to_Login = new Intent(Resetpwd.this,MainActivity.class) ;    //切换User Activity至Login Activity
+                            Intent intent_Register_to_Login = new Intent(Resetpwd.this, MainActivity.class) ;    //切换User Activity至Login Activity
                             startActivity(intent_Register_to_Login);
                             finish();
                         }else{

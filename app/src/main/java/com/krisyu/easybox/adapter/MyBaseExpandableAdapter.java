@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.bottom_navigation.fragments.home_fragment;
+package com.krisyu.easybox.adapter;
 
 import android.content.Context;
 import android.util.SparseArray;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.activity.bottom_navigation.fragments.home_fragment.ChildItem;
 
 import java.util.List;
 

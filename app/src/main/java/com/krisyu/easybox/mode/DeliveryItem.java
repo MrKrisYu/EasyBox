@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.bottom_navigation.fragments.search_fragment;
+package com.krisyu.easybox.mode;
 
 public class DeliveryItem {
     private int boxId;

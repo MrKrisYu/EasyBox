@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.krisyu.easybox">
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".base.MyApplication"
@@ -16,29 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.user.MainActivity" >
+        <activity android:name=".activity.bottom_navigation.fragments.message_fragment.FriendListActivity"></activity>
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.bottom_navigation.NormalActivity"
-            android:parentActivityName=".activity.user.MainActivity"/>
-        <activity android:name=".activity.bottom_navigation.fragments.message_fragment.ChatActivity"
-            android:parentActivityName=".activity.bottom_navigation.NormalActivity">
-        </activity>
+        <activity
+            android:name=".activity.bottom_navigation.NormalActivity"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.bottom_navigation.fragments.message_fragment.ChatActivity"
+            android:parentActivityName=".activity.bottom_navigation.NormalActivity"></activity>
         <activity android:name=".activity.user.User" />
         <activity android:name=".activity.user.Resetpwd" />
         <activity android:name=".activity.user.Register" />
         <activity android:name=".activity.OtherActivity" />
 
-
         <service
             android:name=".service.JWebSocketClientService"
             android:enabled="true"
-            android:exported="true">
-        </service>
+            android:exported="true"></service>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

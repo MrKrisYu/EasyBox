@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.adapter.DeliveryReceivedAdapter;
+import com.krisyu.easybox.mode.DeliveryItem;
 
 import java.util.ArrayList;
 import java.util.List;

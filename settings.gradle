@@ -1,2 +1,2 @@
-include ':app'
+include ':app',':wave'
 rootProject.name='EasyBox'

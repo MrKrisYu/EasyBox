@@ -1,4 +1,4 @@
-package com.krisyu.easybox.activity.user;
+package com.krisyu.easybox.activity;
 
 
 /*****************************************************
@@ -36,8 +36,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.krisyu.easybox.R;
 import com.krisyu.easybox.activity.bottom_navigation.NormalActivity;
-import com.krisyu.easybox.activity.user.listener.AsyncQueryListener;
-import com.krisyu.easybox.activity.user.listener.MainActivityHanlderListener;
+import com.krisyu.easybox.activity.user.Register;
+import com.krisyu.easybox.activity.user.Resetpwd;
+import com.krisyu.easybox.listener.AsyncQueryListener;
+import com.krisyu.easybox.listener.MainActivityHanlderListener;
 import com.krisyu.easybox.base.BaseActivity;
 import com.krisyu.easybox.room_framework.entities.UserData;
 import com.krisyu.easybox.room_framework.reposity.UserRepository;
@@ -45,8 +47,6 @@ import com.krisyu.easybox.room_framework.viewModels.UserViewModel;
 import com.krisyu.easybox.utils.LogUtil;
 
 import java.util.List;
-
-import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
 
 public class MainActivity extends BaseActivity {
 
@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LogUtil.d(TAG, "onCreate");
-        SQLiteStudioService.instance().start(this);
+//        SQLiteStudioService.instance().start(this);
 
         //findViewById
         mAccount = (EditText) findViewById(R.id.login_edit_account);
@@ -137,7 +137,6 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-        LogUtil.e(TAG, "onCreate----------->Thread = " + Thread.currentThread().toString());
         //---------------------------------------AsyncQueryHandler---------------------------------
 
         mAsyncQueryListener = new AsyncQueryListener(mUserViewModel.getUserRepository(),
@@ -191,7 +190,7 @@ public class MainActivity extends BaseActivity {
                     }
                 });
 
-        //------------------------------------------localHandler---------------------------------------
+        //------------------------------------------localHandler------------------------------------
 
         mLocalHandler = new MainActivityHanlderListener(getLifecycle(),
                 new Handler.Callback() {
@@ -292,7 +291,7 @@ public class MainActivity extends BaseActivity {
     protected void onStop(){
         super.onStop();
         LogUtil.d(TAG, "onStop");
-        SQLiteStudioService.instance().stop();
+//        SQLiteStudioService.instance().stop();
     }
 
     /**
@@ -321,7 +320,7 @@ public class MainActivity extends BaseActivity {
                     cancel();
                     break;
                 case R.id.login_text_change_pwd:                             //登录界面的注销按钮
-                    Intent intent_Login_to_reset = new Intent(MainActivity.this,Resetpwd.class) ;    //切换Login Activity至User Activity
+                    Intent intent_Login_to_reset = new Intent(MainActivity.this, Resetpwd.class) ;    //切换Login Activity至User Activity
                     startActivity(intent_Login_to_reset);
                     finish();
                     break;

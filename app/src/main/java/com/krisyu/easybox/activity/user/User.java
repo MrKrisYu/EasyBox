@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.activity.MainActivity;
 import com.krisyu.easybox.base.BaseActivity;
 
 public class User extends BaseActivity {
@@ -24,7 +25,7 @@ public class User extends BaseActivity {
     }
     public void back_to_login(View view) {
         //setContentView(R.layout.login);
-        Intent intent3 = new Intent(User.this,MainActivity.class) ;
+        Intent intent3 = new Intent(User.this, MainActivity.class) ;
         startActivity(intent3);
         finish();
 

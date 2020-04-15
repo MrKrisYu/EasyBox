@@ -26,7 +26,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.krisyu.easybox.R;
+import com.krisyu.easybox.adapter.ChatAdapter;
 import com.krisyu.easybox.base.BaseActivity;
+import com.krisyu.easybox.mode.ChatItem;
+import com.krisyu.easybox.mode.MessageListItem;
 import com.krisyu.easybox.network.JWebSocketClient;
 import com.krisyu.easybox.service.JWebSocketClientService;
 import com.krisyu.easybox.utils.LogUtil;
@@ -302,8 +305,8 @@ public class ChatActivity extends BaseActivity {
                         if(client != null && client.isOpen()){
                             // --修改--这里的username为用户自己的名称ID
                             jWebSocketClientService.sendMsg(1,
-                                    JWebSocketClientService.REQUEST_KEY_USERNAME, "Rich",
-                                    JWebSocketClientService.REQUEST_KEY_PSW, "123");
+                                    new String[]{JWebSocketClientService.REQUEST_KEY_USERNAME,JWebSocketClientService.REQUEST_KEY_PSW},
+                                    new String[]{"Rich", "123"});
                         }else{
                             setVerification(false);
                             Toast.makeText(ChatActivity.this,"连接失败，请稍等或重启App", Toast.LENGTH_SHORT).show();
@@ -385,8 +388,8 @@ public class ChatActivity extends BaseActivity {
                         LogUtil.e(TAG, "发送消息：client=" + client.toString());
                         // --修改-- 聊天好友用户名ID
                         jWebSocketClientService.sendMsg(2,
-                                JWebSocketClientService.REQUEST_KEY_CONTENT, content,
-                                JWebSocketClientService.REQUEST_KEY_USERNAME, friendData.getUserName());//friendData.getUserName()
+                                new String[]{JWebSocketClientService.REQUEST_KEY_CONTENT, JWebSocketClientService.REQUEST_KEY_USERNAME},
+                                new String[]{content,friendData.getUserName()});//friendData.getUserName()
                         msg.setTop(true);
                         msg.setEditing(false);
                         notifyAdapterDataInsertToTail(msg);

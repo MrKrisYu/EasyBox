@@ -19,7 +19,7 @@ import androidx.core.app.TaskStackBuilder;
 
 import com.krisyu.easybox.R;
 import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.ChatActivity;
-import com.krisyu.easybox.activity.bottom_navigation.fragments.message_fragment.MessageListItem;
+import com.krisyu.easybox.mode.MessageListItem;
 import com.krisyu.easybox.network.JWebSocketClient;
 import com.krisyu.easybox.utils.Constants;
 import com.krisyu.easybox.utils.LogUtil;
@@ -173,24 +173,26 @@ public class JWebSocketClientService extends Service {
 
 
     public ArrayMap<String,String> msgMap = new ArrayMap<>();
+
     /**
      * 开启向服务器发送请求的线程
      * @param msgType 消息类型：1——验证请求
      *                         2——转发消息请求
-     * @param keyAndVal 具体请求内容 以 Key,Values形式
+     * @param keys 请求类型 键值
+     * @param values 具体请求内容
      */
-    public void sendMsg(final int msgType, final String...keyAndVal) {
+    public void sendMsg(final int msgType, final String[] keys, final String[] values) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 if (null != client) {
                         //填充msgMap内容
-                        if(keyAndVal.length % 2 != 0){
+                        if(keys.length != values.length){
                             return;
                         }else{
                             msgMap.clear();
-                            for(int i=0; i<keyAndVal.length; i += 2){
-                                msgMap.put(keyAndVal[i], keyAndVal[i+1]);
+                            for(int i=0; i<keys.length; i++ ){
+                                msgMap.put(keys[i], values[i]);
                             }
                         }
                         // 发送消息逻辑
@@ -231,7 +233,7 @@ public class JWebSocketClientService extends Service {
                     }
 
             }
-        }).start();
+        },"WebSocketRequestThread").start();
     }
 
     /**

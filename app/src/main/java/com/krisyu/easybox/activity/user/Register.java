@@ -14,16 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.krisyu.easybox.R;
-import com.krisyu.easybox.activity.user.listener.AsyncQueryListener;
-import com.krisyu.easybox.activity.user.listener.MainActivityHanlderListener;
+import com.krisyu.easybox.activity.MainActivity;
+import com.krisyu.easybox.listener.AsyncQueryListener;
+import com.krisyu.easybox.listener.MainActivityHanlderListener;
 import com.krisyu.easybox.base.BaseActivity;
 import com.krisyu.easybox.room_framework.entities.UserData;
 import com.krisyu.easybox.room_framework.reposity.UserRepository;
 import com.krisyu.easybox.room_framework.viewModels.UserViewModel;
 import com.krisyu.easybox.utils.LogUtil;
-
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Register extends BaseActivity {
     private static final String TAG = "Register";
@@ -153,7 +151,7 @@ public class Register extends BaseActivity {
                         if(rowInserted >= 0){
                             Toast.makeText(Register.this, getString(R.string.register_success),Toast.LENGTH_SHORT).show();
                             //切换User Activity至Login Activity
-                            Intent intent_Register_to_Login = new Intent(Register.this,MainActivity.class) ;
+                            Intent intent_Register_to_Login = new Intent(Register.this, MainActivity.class) ;
                             startActivity(intent_Register_to_Login);
                             finish();
                         }else{
